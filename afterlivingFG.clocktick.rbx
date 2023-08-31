@@ -19,9 +19,17 @@ end
 
 if increment_text_blob == "+skip"
   add_fuzz = true
-  skip = (Random.rand(11...33)).to_i
+  skip_toss = 1
+  if ARGV[2].to_i > 0
+    skip_toss = ARGV[2].to_i
+  end
+  skip = (Random.rand(11...44)).to_i * skip_toss
   increment_text_blob = "#{skip}m"
-  puts "Skipping ahead " + increment_text_blob
+  skip_toss_text = ""
+  if skip_toss > 1
+    skip_toss_text = "(#{skip_toss}x) "
+  end
+  puts "Skipping ahead #{skip_toss_text}#{increment_text_blob}"
 end
 
 increment_text_set = increment_text_blob.split(" ")
